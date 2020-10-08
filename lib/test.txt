@@ -1,0 +1,7 @@
+=> runApp(MaterialApp(
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => Home(),
+        '/result': (context) => Result(),
+      },
+    ));

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1013103642013",
+    "firebase_url": "https://quadratic-solver-rh.firebaseio.com",
+    "project_id": "quadratic-solver-rh",
+    "storage_bucket": "quadratic-solver-rh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013103642013:android:accdff0c6ced1bc2e79b74",
+        "android_client_info": {
+          "package_name": "com.rh.quadratic_solver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013103642013-7acvh9af3od8s4t6o368830s3ogrs3tl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwzS6yCaC_VQMKO2KFaUmbaRNyuSVpecc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013103642013-7acvh9af3od8s4t6o368830s3ogrs3tl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
