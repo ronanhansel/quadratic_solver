@@ -5,6 +5,7 @@ import 'package:quadratic_solver/pages/result.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quadratic_solver/translations/translation.dart';
 
 
 void main() async{
@@ -16,6 +17,7 @@ void main() async{
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
+      supportedLocales: string.supportedLocales(),
       title: 'Quadratic Solver',
       initialRoute: '/home',
       routes: {

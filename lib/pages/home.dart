@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:quadratic_solver/pages/result.dart';
 import 'package:quadratic_solver/services/admob_services.dart';
+import 'package:quadratic_solver/translations/translation.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -60,7 +61,7 @@ class _HomeState extends State<Home> {
                     Container(
                       width: 200,
                       child: Text(
-                          'Number only, decimal and negative are allowed',
+                          string.text("user_input_sub"),
                           style: TextStyle(fontSize: 17)),
                     ),
                     SizedBox(
