@@ -16,10 +16,13 @@ class Result extends StatefulWidget {
 class _ResultState extends State<Result> with TickerProviderStateMixin {
   int round = 8;
   int decimal;
+  final ams = AdMobService();
 
   @override
   void initState() {
     dataBox = Hive.box<String>("databox");
+    Admob.requestTrackingAuthorization();
+    Admob.initialize();
     super.initState();
   }
 
@@ -142,8 +145,7 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                           child: Text(
                             string.text('result'),
                             style: TextStyle(
-                                fontSize: 45,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 45, fontWeight: FontWeight.bold),
                           ),
                         ),
                         IconButton(
@@ -164,7 +166,7 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                       style: TextStyle(
                         fontSize: 25,
                       ),
-                      child: CaTeX('${a}x\u00B2 + ${b}x + $c = 0'),
+                      child: Text('${a}x\u00B2 + ${b}x + $c = 0'),
                     ),
                   ],
                 ),
@@ -315,6 +317,7 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                   height: 0,
                 );
               }),
+              Center(child: AdmobBanner(adUnitId: ams.getBannerAdId(), adSize: AdmobBannerSize.BANNER))
             ],
           ),
         ),
