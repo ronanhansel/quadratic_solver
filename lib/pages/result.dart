@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:catex/catex.dart';
 import 'package:flutter/material.dart';
+import 'package:quadratic_solver/locale/translations.dart';
 import 'package:quadratic_solver/services/hints.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:hive/hive.dart';
@@ -19,10 +20,9 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
   @override
   void initState() {
     dataBox = Hive.box<String>("databox");
-    Admob.initialize();
     super.initState();
   }
-  final ams = AdMobService();
+
   int d;
   bool deltaint = false;
   Box<String> dataBox;
@@ -122,87 +122,101 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
     if (delta < 0) {
       validity = false;
     }
-    return Hero(
-      tag: 'fab',
-      child: Material(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: SlidingUpPanel(
-              backdropColor: Colors.transparent,
-              body: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Wrap(
-                  children: <Widget>[
-                    SafeArea(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Result',
-                                  style: TextStyle(
-                                      fontSize: 45,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              IconButton(
-                                  icon: Icon(Icons.arrow_back),
-                                  onPressed: () => Navigator.pop(context)),
-                            ],
-                          ),
-                        ],
-                      ),
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      body: SlidingUpPanel(
+        backdropColor: Colors.transparent,
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+          child: Wrap(
+            children: <Widget>[
+              SafeArea(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
                     ),
-                    Center(
-                      child: DefaultTextStyle.merge(
-                        style: TextStyle(
-                          fontSize: 25,
-                        ),
-                        child: CaTeX('${a}x\u00B2 + ${b}x + $c = 0'),
-                      ),
-                    ),
-                    Divider(height: 25, color: Colors.grey[100]),
-                    Text(
-                      'Delta is: $delta',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                    Text(
-                      () {
-                        if (!validity) {
-                          return 'No real number solution exists';
-                        } else {
-                          return 'Has real number solutions';
-                        }
-                      }(),
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.red[900],
-                          fontStyle: FontStyle.italic),
-                    ),
-                    Divider(height: 20, color: Colors.grey[100]),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: DefaultTextStyle.merge(
-                              style: TextStyle(fontSize: 20),
-                              child: Wrap(
+                          child: Text(
+                            string.text('result'),
+                            style: TextStyle(
+                                fontSize: 45,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.arrow_back),
+                            onPressed: () => Navigator.pop(context)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 30,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    DefaultTextStyle.merge(
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                      child: CaTeX('${a}x\u00B2 + ${b}x + $c = 0'),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(height: 25, color: Colors.grey[100]),
+              Container(
+                height: 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    Text(
+                      string.text('delta_is') + '$delta',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                () {
+                  if (!validity) {
+                    return string.text('no_real');
+                  } else {
+                    return string.text('has_real');
+                  }
+                }(),
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.red[900],
+                    fontStyle: FontStyle.italic),
+              ),
+              Divider(height: 20, color: Colors.grey[100]),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DefaultTextStyle.merge(
+                        style: TextStyle(fontSize: 20),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          width: MediaQuery.of(context).size.width / 2 - 20,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            children: [
+                              Wrap(
                                 direction: Axis.vertical,
                                 alignment: WrapAlignment.center,
                                 children: [
-                                  CaTeX('Plus: x\u2081 is '),
+                                  Text('x\u2081 ' + string.text('plus_is')),
                                   CaTeX(
                                       '\\frac {-b + \\sqrt {\u0394}}  {2 * a}'),
                                   DefaultTextStyle.merge(
@@ -219,23 +233,31 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: DefaultTextStyle.merge(
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                              child: Wrap(
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DefaultTextStyle.merge(
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          width: MediaQuery.of(context).size.width / 2 - 20,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            children: [
+                              Wrap(
                                 direction: Axis.vertical,
                                 alignment: WrapAlignment.center,
                                 children: [
-                                  CaTeX(
-                                    'Minus: x\u2082 is ',
-                                  ),
+                                  Text('x\u2082 ' + string.text('minus_is')),
                                   CaTeX(
                                       '\\frac {-b - \\sqrt {\u0394}}  {2 * a}'),
                                   DefaultTextStyle.merge(
@@ -252,89 +274,88 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Divider(height: 20, color: Colors.grey[100]),
-                    FutureBuilder(builder:
-                        (BuildContext context, AsyncSnapshot<Widget> widget) {
-                      if (validity && !deltaint) {
-                        return Container(
-                            child: ClipRRect(
-                          borderRadius: BorderRadius.circular(150),
-                          child: RaisedButton(
-                            child: Text(
-                              '$buttoncontent',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            elevation: 0,
-                            onPressed: () {
-                              setState(() {
-                                if (round == 8) {
-                                  round = 3;
-                                } else {
-                                  round = 8;
-                                }
-                              });
-                            },
-                          ),
-                        ));
-                      }
-                      return Container(
-                        child: widget.data,
-                        width: 0,
-                        height: 0,
-                      );
-                    }),
-                  ],
-                ),
-              ),
-              panel: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: SizedBox(
-                              child: Icon(Icons.expand_less),
-                              height: MediaQuery.of(context).size.height / 18,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 30),
-                            child: Text(
-                              'Shortcuts!',
-                              style: TextStyle(fontSize: 35),
-                            ),
-                          ),
-                        ],
-                      )),
-                  Hints.bhint(context, b),
-                  Hints.deltahint(context, a, b, c, delta),
-                  Hints.hint(context, a, b, c),
-                  SizedBox(
-                    height: 20,
+                    ),
                   ),
-                  Center(child: AdmobBanner(adUnitId: ams.getBannerAdId(), adSize: AdmobBannerSize.BANNER)),
                 ],
               ),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-            ),
+              Divider(height: 20, color: Colors.grey[100]),
+              FutureBuilder(builder:
+                  (BuildContext context, AsyncSnapshot<Widget> widget) {
+                if (validity && !deltaint) {
+                  return Container(
+                      child: ClipRRect(
+                    borderRadius: BorderRadius.circular(150),
+                    child: RaisedButton(
+                      child: Text(
+                        '$buttoncontent',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      elevation: 0,
+                      onPressed: () {
+                        setState(() {
+                          if (round == 8) {
+                            round = 3;
+                          } else {
+                            round = 8;
+                          }
+                        });
+                      },
+                    ),
+                  ));
+                }
+                return Container(
+                  child: widget.data,
+                  width: 0,
+                  height: 0,
+                );
+              }),
+            ],
           ),
         ),
+        panel: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: SizedBox(
+                        child: Icon(Icons.expand_less),
+                        height: MediaQuery.of(context).size.height / 18,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 30),
+                      child: Text(
+                        string.text('shortcuts'),
+                        style: TextStyle(fontSize: 35),
+                      ),
+                    ),
+                  ],
+                )),
+            Hints.bhint(context, b),
+            Hints.deltahint(context, a, b, c, delta),
+            Hints.hint(context, a, b, c),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
       ),
     );
   }

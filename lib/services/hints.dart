@@ -1,5 +1,6 @@
 import 'package:catex/catex.dart';
 import 'package:flutter/material.dart';
+import 'package:quadratic_solver/locale/translations.dart';
 
 class Hints {
   double a;
@@ -22,7 +23,7 @@ class Hints {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('~ Since b is an even number, apply this formula:'),
+                Text(string.text('b_even')),
                 Wrap(
                   children: [
                     CaTeX('\\frac {-b + \\sqrt {\u0394}}  {a}'),
@@ -65,7 +66,7 @@ class Hints {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('~ Since \u0394 = 0'),
+              Text('~ '+ string.text('since') + ' \u0394 = 0'),
               Wrap(
                 children: [
                   CaTeX('x\u2081 = x\u2082 = - \\frac b {2 * a} = '),
@@ -103,7 +104,7 @@ class Hints {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('~ Since a + b + c = 0'),
+              Text('~ ' + string.text('since') +' a + b + c = 0'),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -132,7 +133,7 @@ class Hints {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('~ Since a - b + c = 0'),
+              Text('~ ' + string.text('since') + ' a - b + c = 0'),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -159,7 +160,7 @@ class Hints {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('No other shortcuts available'),
+            Text(string.text('no_shortcuts')),
           ],
         ),
       ),

@@ -1,10 +1,12 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flag/flag.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:quadratic_solver/pages/result.dart';
 import 'package:quadratic_solver/services/admob_services.dart';
-import 'package:quadratic_solver/translations/translation.dart';
+import 'package:quadratic_solver/locale/translations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,9 +14,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final ams = AdMobService();
   @override
   void initState() {
     dataBox = Hive.box<String>("databox");
+    Admob.requestTrackingAuthorization();
     Admob.initialize();
     super.initState();
   }
@@ -23,7 +27,7 @@ class _HomeState extends State<Home> {
   final firstController = TextEditingController();
   final secondController = TextEditingController();
   final thirdController = TextEditingController();
-  final ams = AdMobService();
+
 
   @override
   void dispose() {
@@ -46,12 +50,30 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 10,
               ),
+              Wrap(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setLanguage('vn');
+                      setState(() {});
+                    },
+                    icon: Flag('VN'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setLanguage('en');
+                      setState(() {});
+                    },
+                    icon: Flag('GB'),
+                  )
+                ],
+              ),
               Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'User Input',
+                      string.text('user_input'),
                       style:
                           TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                     ),
@@ -60,8 +82,7 @@ class _HomeState extends State<Home> {
                     ),
                     Container(
                       width: 200,
-                      child: Text(
-                          string.text("user_input_sub"),
+                      child: Text(string.text('user_input_sub'),
                           style: TextStyle(fontSize: 17)),
                     ),
                     SizedBox(
@@ -148,7 +169,11 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 20,
               ),
-              AdmobBanner(adUnitId: ams.getBannerAdId(), adSize: AdmobBannerSize.BANNER),
+              Center(
+                child: AdmobBanner(
+                    adUnitId: ams.getBannerAdId(),
+                    adSize: AdmobBannerSize.FULL_BANNER),
+              ),
             ],
           ),
         ),
@@ -160,7 +185,7 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Please fill all the required values'),
+                    title: Text(string.text('empty_values_warning')),
                   );
                 });
           } else if (firstController.text == '0') {
@@ -168,7 +193,7 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('a can\'t be 0'),
+                    title: Text(string.text('a_zero')),
                   );
                 });
           } else if (secondController.text == '') {
@@ -176,14 +201,14 @@ class _HomeState extends State<Home> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                      title: Text('Please fill all the required values'));
+                      title: Text(string.text('empty_values_warning')));
                 });
           } else if (thirdController.text == '') {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Please fill all the required values'),
+                    title: Text(string.text('empty_values_warning')),
                   );
                 });
           } else {
@@ -196,28 +221,33 @@ class _HomeState extends State<Home> {
               "data3",
               thirdController.text,
             );
-            Navigator.push(
-                context,
-                PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 500),
-                    pageBuilder: (_, __, ___) => Result()));
+            Navigator.of(context).push(_createRoute());
           }
         },
-        child: Hero(
-          tag: 'fab',
-          child: Container(
-            width: 60,
-            height: 60,
-            child: Material(
-              borderRadius: BorderRadius.all(Radius.circular(0)),
-              color: Colors.grey[100],
-              child: Center(
-                  child: Text('=',
-                      style: TextStyle(fontSize: 30, color: Colors.black))),
-            ),
+        child: Container(
+          width: 60,
+          height: 60,
+          child: Material(
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+            color: Colors.grey[100],
+            child: Center(
+                child: Text('=',
+                    style: TextStyle(fontSize: 30, color: Colors.black))),
           ),
         ),
       ),
     );
   }
+}
+
+Future<void> setLanguage(String code) async {
+  await string.setNewLanguage(code).then((_) {
+    string.setPreferredLanguage(string.currentLanguage);
+  });
+}
+
+Route _createRoute() {
+  return CupertinoPageRoute(
+    builder: (context) => Result(),
+  );
 }

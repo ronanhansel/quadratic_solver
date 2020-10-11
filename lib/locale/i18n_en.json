@@ -1,0 +1,16 @@
+{
+  "user_input": "User Input",
+  "user_input_sub": "Number only, decimal and negative are allowed",
+  "empty_values_warning": "Please fill all the required values",
+  "a_zero": "a can't be zero",
+  "shortcuts": "Shortcuts!",
+  "minus_is": "Minus is ",
+  "plus_is": "Plus is ",
+  "has_real": "Has real number solutions",
+  "no_real": "No real number solution exists",
+  "result": "Result",
+  "delta_is": "Delta is: ",
+  "b_even": "~ Since b is an even number, apply this formula:",
+  "since": "Since",
+  "no_shortcuts": "No other shortcuts available"
+}

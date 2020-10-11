@@ -1,0 +1,16 @@
+{
+  "user_input": "Nhập dữ liệu",
+  "user_input_sub": "Chỉ sử dụng số, cho phép số âm và thập phân",
+  "empty_values_warning": "Hay điền hết các dữ liệu cần thiết",
+  "a_zero": "a không thể bằng không",
+  "shortcuts": "Cách khác!",
+  "minus_is": "Âm là ",
+  "plus_is": "Dương là ",
+  "has_real": "Có nghiệm trêm R",
+  "no_real": "Không có nghiệm trên R",
+  "result": "Kết quả",
+  "delta_is": "Delta là: ",
+  "b_even": "~ Vì b là số chẵn, áp dụng công thức:",
+  "since": "Vì",
+  "no_shortcuts": "Không còn cách làm khác"
+}
