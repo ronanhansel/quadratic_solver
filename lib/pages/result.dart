@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:catex/catex.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quadratic_solver/locale/translations.dart';
 import 'package:quadratic_solver/services/hints.dart';
@@ -335,10 +337,10 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Center(
-                      child: SizedBox(
-                        child: Icon(Icons.expand_less),
-                        height: MediaQuery.of(context).size.height / 18,
-                      ),
+                      child: Container(
+                          height: 25,
+                          width: 25,
+                          child: FlareActor('assets/arrow_up.flr', animation: 'has_shortcut', fit: BoxFit.fitHeight, color: Colors.grey,))
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 30),

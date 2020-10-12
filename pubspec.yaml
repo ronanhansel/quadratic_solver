@@ -32,6 +32,10 @@ dependencies:
   get_storage: ^1.2.1
   flag: ^3.0.5
   flutter_launcher_icons: ^0.8.1
+  admob_flutter: ^1.0.0
+  flare_flutter: ^2.0.6
+  native_shared_preferences: ^1.0.4
+  introduction_screen: ^1.0.9
 flutter_icons:
   ios: false
   android: true
@@ -63,6 +67,10 @@ flutter:
     - lib/locale/
     - icon/foreground.png
     - icon/main.png
+    - assets/arrow_up.flr
+    - assets/first.png
+    - assets/second.png
+    - assets/third.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

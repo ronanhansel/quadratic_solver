@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quadratic_solver/locale/translations.dart';
+import 'package:quadratic_solver/pages/welcome.dart';
 
 
 void main() async{
@@ -21,10 +22,11 @@ void main() async{
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       supportedLocales: string.supportedLocales(),
+      initialRoute: '/welcome',
       title: 'Quadratic Solver',
-      initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
+        '/welcome': (context) => Welcome(),
         '/result': (context) => Result(),
       },
     ));
