@@ -338,7 +338,7 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                       child: Container(
                           height: 25,
                           width: 25,
-                          child: FlareActor('assets/arrow_up.flr', animation: 'has_shortcut', fit: BoxFit.fitHeight, color: Colors.grey,))
+                          child: FlareActor('assets/arrow_up.flr', animation: 'has_shortcut', fit: BoxFit.fitHeight, color: Colors.black,))
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 30),

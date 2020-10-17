@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:neumorphic/neumorphic.dart';
 import 'package:quadratic_solver/pages/result.dart';
 import 'package:quadratic_solver/services/admob_services.dart';
 import 'package:quadratic_solver/locale/translations.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'dart:async';
 
+import 'package:quadratic_solver/widgets/alerts.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -68,216 +70,249 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
-              SizedBox(
-                height: 10,
-              ),
-              Wrap(
-                key: intro.keys[0],
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setLanguage('vn');
-                      setState(() {});
-                    },
-                    icon: Flag('VN'),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setLanguage('en');
-                      setState(() {});
-                    },
-                    icon: Flag('GB'),
-                  )
-                ],
-              ),
               Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      string.text('user_input'),
-                      style:
-                      TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 200,
-                      child: Text(string.text('user_input_sub'),
-                          style: TextStyle(fontSize: 17)),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Center(
-                      child: Text(
-                        '$a' + 'x\u00B2 + ' + '$b' + 'x + ' + '$c' + ' = 0',
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Wrap(
+                    key: intro.keys[0],
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setLanguage('vn');
+                          setState(() {});
+                        },
+                        icon: Flag('VN'),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setLanguage('en');
+                          setState(() {});
+                        },
+                        icon: Flag('GB'),
+                      )
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        string.text('user_input'),
                         style: TextStyle(
-                            fontSize: 30
-                        ),),
+                            fontSize: 45, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: 200,
+                        child: Text(string.text('user_input_sub'),
+                            style: TextStyle(fontSize: 17)),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Center(
+                        child: Text(
+                          '$a' + 'x\u00B2 + ' + '$b' + 'x + ' + '$c' + ' = 0',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        key: intro.keys[1],
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Divider(
+                            color: Colors.white,
+                            height: 10,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              autocorrect: false,
+                              controller: firstController,
+                              onChanged: (text) {
+                                setState(() {
+                                  a = text;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'a',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 30,
+                                  )),
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: false),
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp("[0-9-.]")),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              autocorrect: false,
+                              controller: secondController,
+                              onChanged: (text) {
+                                setState(() {
+                                  b = text;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'b',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 30,
+                                  )),
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: false),
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp("[0-9-.]")),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextField(
+                              autocorrect: false,
+                              controller: thirdController,
+                              onChanged: (text) {
+                                setState(() {
+                                  c = text;
+                                });
+                              },
+                              decoration: InputDecoration(
+                                  labelText: 'c',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ),
+                                  labelStyle: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 30,
+                                  )),
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: false),
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.allow(
+                                    RegExp("[0-9-.]")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 8,
+                  ),
+                  Center(
+                    child: NeuCard(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width - 20,
+                      curveType: CurveType.convex,
+                      color: Colors.grey[300],
+                      bevel: 5,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        child: AdmobBanner(
+                            adUnitId: ams.getBannerAdId(),
+                            adSize: AdmobBannerSize.FULL_BANNER),
+                      ),
                     ),
-                    SizedBox(height: 20,),
-                    Row(
-                      key: intro.keys[1],
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Divider(
-                          color: Colors.white,
-                          height: 10,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: TextField(
-                            autocorrect: false,
-                            controller: firstController,
-                            onChanged: (text) {
-                              setState(() {
-                                a = text;
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 8,
+                  ),
+                  Container(
+                    height: 50,
+                    width: 50,
+                    child: NeuButton(
+                      child: Center(
+                          child: Text(
+                        '=',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )),
+                      decoration: NeumorphicDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      onPressed: () {
+                        if (firstController.text == '') {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Alert(
+                                    warning:
+                                        string.text('empty_values_warning'));
                               });
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'a',
-                                border: OutlineInputBorder(),
-                                labelStyle: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 30,
-                                )),
-                            keyboardType:
-                            TextInputType.numberWithOptions(decimal: false),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[0-9-.]")),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 10,),
-                        Expanded(
-                          flex: 1,
-                          child: TextField(
-                            autocorrect: false,
-                            controller: secondController,
-                            onChanged: (text) {
-                              setState(() {
-                                b = text;
+                        } else if (firstController.text == '0') {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Alert(
+                                  warning: string.text('a_zero'),
+                                );
                               });
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'b',
-                                border: OutlineInputBorder(),
-                                labelStyle: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 30,
-                                )),
-                            keyboardType:
-                            TextInputType.numberWithOptions(decimal: false),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[0-9-.]")),
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 10,),
-                        Expanded(
-                          flex: 1,
-                          child: TextField(
-                            autocorrect: false,
-                            controller: thirdController,
-                            onChanged: (text) {
-                              setState(() {
-                                c = text;
+                        } else if (secondController.text == '') {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Alert(
+                                  warning: 'empty_values_warning',
+                                );
                               });
-                            },
-                            decoration: InputDecoration(
-                                labelText: 'c',
-                                border: OutlineInputBorder(),
-                                labelStyle: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 30,
-                                )),
-                            keyboardType:
-                            TextInputType.numberWithOptions(decimal: false),
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[0-9-.]")),
-                            ],
-                          ),
-                        ),
-                      ],
+                        } else if (thirdController.text == '') {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Alert(
+                                  warning: 'empty_values_warning',
+                                );
+                              });
+                        } else {
+                          dataBox.put("data1", firstController.text);
+                          dataBox.put(
+                            "data2",
+                            secondController.text,
+                          );
+                          dataBox.put(
+                            "data3",
+                            thirdController.text,
+                          );
+                          Navigator.of(context).push(_createRoute());
+                        }
+                      },
                     ),
-                  ]),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width - 20,
-                  child: AdmobBanner(
-                      adUnitId: ams.getBannerAdId(),
-                      adSize: AdmobBannerSize.FULL_BANNER),
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          if (firstController.text == '') {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(string.text('empty_values_warning')),
-                  );
-                });
-          } else if (firstController.text == '0') {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(string.text('a_zero')),
-                  );
-                });
-          } else if (secondController.text == '') {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                      title: Text(string.text('empty_values_warning')));
-                });
-          } else if (thirdController.text == '') {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(string.text('empty_values_warning')),
-                  );
-                });
-          } else {
-            dataBox.put("data1", firstController.text);
-            dataBox.put(
-              "data2",
-              secondController.text,
-            );
-            dataBox.put(
-              "data3",
-              thirdController.text,
-            );
-            Navigator.of(context).push(_createRoute());
-          }
-        },
-        child: FloatingActionButton(
-          key: intro.keys[2],
-          backgroundColor: Colors.grey[100],
-          splashColor: Colors.red,
-          child: Center(
-              child: Text('=',
-                  style: TextStyle(fontSize: 30, color: Colors.black))),
         ),
       ),
     );

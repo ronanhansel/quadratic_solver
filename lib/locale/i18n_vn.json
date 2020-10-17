@@ -1,8 +1,8 @@
 {
   "user_input": "Nhập dữ liệu",
   "user_input_sub": "Chỉ sử dụng số, cho phép số âm và thập phân",
-  "empty_values_warning": "Hay điền hết các dữ liệu cần thiết",
-  "a_zero": "a không thể bằng không",
+  "empty_values_warning": "Hãy điền hết các dữ liệu cần thiết",
+  "a_zero": "a không thể bằng 0",
   "Round up to": "Làm tròn đến",
   "decimal number": "chữ số thập phân",
   "shortcuts": "Cách khác!",
