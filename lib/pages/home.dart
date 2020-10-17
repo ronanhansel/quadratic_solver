@@ -7,6 +7,9 @@ import 'package:hive/hive.dart';
 import 'package:quadratic_solver/pages/result.dart';
 import 'package:quadratic_solver/services/admob_services.dart';
 import 'package:quadratic_solver/locale/translations.dart';
+import 'package:flutter_intro/flutter_intro.dart';
+import 'dart:async';
+
 
 class Home extends StatefulWidget {
   @override
@@ -14,12 +17,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Intro intro = Intro(
+    stepCount: 3,
+    padding: EdgeInsets.all(8),
+    borderRadius: BorderRadius.all(Radius.circular(4)),
+    widgetBuilder: StepWidgetBuilder.useDefaultTheme(
+      texts: [
+        string.text('guide_first'),
+        string.text('guide_second'),
+        string.text('guide_third'),
+      ],
+      btnLabel: string.text('Next'),
+      showStepLabel: true,
+    ),
+  );
   final ams = AdMobService();
+
   @override
   void initState() {
     dataBox = Hive.box<String>("databox");
-    Admob.requestTrackingAuthorization();
-    Admob.initialize();
+    print(dataBox.get("Startup"));
+    if (dataBox.get("Startup") == '1') {
+      Timer(Duration(microseconds: 0), () {
+        intro.start(context);
+      });
+    }
     super.initState();
   }
 
@@ -27,7 +49,9 @@ class _HomeState extends State<Home> {
   final firstController = TextEditingController();
   final secondController = TextEditingController();
   final thirdController = TextEditingController();
-
+  String a = 'a';
+  String b = 'b';
+  String c = 'c';
 
   @override
   void dispose() {
@@ -51,6 +75,7 @@ class _HomeState extends State<Home> {
                 height: 10,
               ),
               Wrap(
+                key: intro.keys[0],
                 children: [
                   IconButton(
                     onPressed: () {
@@ -75,7 +100,7 @@ class _HomeState extends State<Home> {
                     Text(
                       string.text('user_input'),
                       style:
-                          TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 10,
@@ -86,20 +111,34 @@ class _HomeState extends State<Home> {
                           style: TextStyle(fontSize: 17)),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 40,
                     ),
-                    Column(
+                    Center(
+                      child: Text(
+                        '$a' + 'x\u00B2 + ' + '$b' + 'x + ' + '$c' + ' = 0',
+                        style: TextStyle(
+                            fontSize: 30
+                        ),),
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      key: intro.keys[1],
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Divider(
                           color: Colors.white,
                           height: 10,
                         ),
-                        Container(
-                          width: 150,
+                        Expanded(
+                          flex: 1,
                           child: TextField(
                             autocorrect: false,
                             controller: firstController,
+                            onChanged: (text) {
+                              setState(() {
+                                a = text;
+                              });
+                            },
                             decoration: InputDecoration(
                                 labelText: 'a',
                                 border: OutlineInputBorder(),
@@ -108,22 +147,24 @@ class _HomeState extends State<Home> {
                                   fontSize: 30,
                                 )),
                             keyboardType:
-                                TextInputType.numberWithOptions(decimal: false),
+                            TextInputType.numberWithOptions(decimal: false),
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9-.]")),
                             ],
                           ),
                         ),
-                        Divider(
-                          color: Colors.white,
-                          height: 10,
-                        ),
-                        Container(
-                          width: 150,
+                        SizedBox(width: 10,),
+                        Expanded(
+                          flex: 1,
                           child: TextField(
                             autocorrect: false,
                             controller: secondController,
+                            onChanged: (text) {
+                              setState(() {
+                                b = text;
+                              });
+                            },
                             decoration: InputDecoration(
                                 labelText: 'b',
                                 border: OutlineInputBorder(),
@@ -132,22 +173,24 @@ class _HomeState extends State<Home> {
                                   fontSize: 30,
                                 )),
                             keyboardType:
-                                TextInputType.numberWithOptions(decimal: false),
+                            TextInputType.numberWithOptions(decimal: false),
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9-.]")),
                             ],
                           ),
                         ),
-                        Divider(
-                          color: Colors.white,
-                          height: 10,
-                        ),
-                        Container(
-                          width: 150,
+                        SizedBox(width: 10,),
+                        Expanded(
+                          flex: 1,
                           child: TextField(
                             autocorrect: false,
                             controller: thirdController,
+                            onChanged: (text) {
+                              setState(() {
+                                c = text;
+                              });
+                            },
                             decoration: InputDecoration(
                                 labelText: 'c',
                                 border: OutlineInputBorder(),
@@ -156,7 +199,7 @@ class _HomeState extends State<Home> {
                                   fontSize: 30,
                                 )),
                             keyboardType:
-                                TextInputType.numberWithOptions(decimal: false),
+                            TextInputType.numberWithOptions(decimal: false),
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9-.]")),
@@ -164,15 +207,19 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ]),
               SizedBox(
                 height: 20,
               ),
               Center(
-                child: AdmobBanner(
-                    adUnitId: ams.getBannerAdId(),
-                    adSize: AdmobBannerSize.FULL_BANNER),
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width - 20,
+                  child: AdmobBanner(
+                      adUnitId: ams.getBannerAdId(),
+                      adSize: AdmobBannerSize.FULL_BANNER),
+                ),
               ),
             ],
           ),
@@ -224,16 +271,13 @@ class _HomeState extends State<Home> {
             Navigator.of(context).push(_createRoute());
           }
         },
-        child: Container(
-          width: 60,
-          height: 60,
-          child: Material(
-            borderRadius: BorderRadius.all(Radius.circular(0)),
-            color: Colors.grey[100],
-            child: Center(
-                child: Text('=',
-                    style: TextStyle(fontSize: 30, color: Colors.black))),
-          ),
+        child: FloatingActionButton(
+          key: intro.keys[2],
+          backgroundColor: Colors.grey[100],
+          splashColor: Colors.red,
+          child: Center(
+              child: Text('=',
+                  style: TextStyle(fontSize: 30, color: Colors.black))),
         ),
       ),
     );

@@ -1,8 +1,10 @@
 {
   "user_input": "User Input",
-  "user_input_sub": "Number only, decimal and negative are allowed",
+  "user_input_sub": "Numbers only, decimal and negative are allowed",
   "empty_values_warning": "Please fill all the required values",
   "a_zero": "a can't be zero",
+  "Round up to": "Round up to",
+  "decimal number": "decimal numbers",
   "shortcuts": "Shortcuts!",
   "minus_is": "Minus is ",
   "plus_is": "Plus is ",
@@ -12,5 +14,17 @@
   "delta_is": "Delta is: ",
   "b_even": "~ Since b is an even number, apply this formula:",
   "since": "Since",
-  "no_shortcuts": "No other shortcuts available"
+  "no_shortcuts": "No other shortcuts available",
+  "title_welcome_first": "Welcome to Quadratic Solver!",
+  "body_welcome_first": "You can select the corresponding flag to change your language",
+  "title_welcome_second": "A convenient app to solve your problems",
+  "body_welcome_second": "Press = to show results",
+  "title_welcome_third": "Smart and intuitive",
+  "body_welcome_third": "Swipe up to see some tricks",
+  "guide_first": "Change language here!",
+  "guide_second": "Set the known numbers here!",
+  "guide_third": "Press to show result",
+  "Next": "Next",
+  "Done": "Done",
+  "Skip": "Skip"
 }

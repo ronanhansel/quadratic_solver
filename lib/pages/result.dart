@@ -8,7 +8,6 @@ import 'package:quadratic_solver/services/hints.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:hive/hive.dart';
 import 'package:quadratic_solver/services/admob_services.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 
 class Result extends StatefulWidget {
   @override
@@ -23,8 +22,6 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
   @override
   void initState() {
     dataBox = Hive.box<String>("databox");
-    Admob.requestTrackingAuthorization();
-    Admob.initialize();
     super.initState();
   }
 
@@ -67,7 +64,7 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
     } else if (minusbb * 10 - (minusbb.toInt()) * 10 != 0) {
       minusb = minusbb;
     }
-    String buttoncontent = 'Round up to $decimal decimal number?';
+    String buttoncontent = string.text('Round up to') + ' $decimal ' + string.text('decimal number') + '?';
     var deltaa = b * b - 4 * a * c;
     var delta;
     if (deltaa * 10 - (deltaa.toInt()) * 10 == 0 && validity) {
@@ -290,28 +287,30 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
               FutureBuilder(builder:
                   (BuildContext context, AsyncSnapshot<Widget> widget) {
                 if (validity && !deltaint) {
-                  return Container(
-                      child: ClipRRect(
-                    borderRadius: BorderRadius.circular(150),
-                    child: RaisedButton(
-                      child: Text(
-                        '$buttoncontent',
-                        style: TextStyle(
-                          fontSize: 20,
+                  return Center(
+                    child: Container(
+                        child: ClipRRect(
+                      borderRadius: BorderRadius.circular(150),
+                      child: RaisedButton(
+                        child: Text(
+                          '$buttoncontent',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
                         ),
+                        elevation: 0,
+                        onPressed: () {
+                          setState(() {
+                            if (round == 8) {
+                              round = 3;
+                            } else {
+                              round = 8;
+                            }
+                          });
+                        },
                       ),
-                      elevation: 0,
-                      onPressed: () {
-                        setState(() {
-                          if (round == 8) {
-                            round = 3;
-                          } else {
-                            round = 8;
-                          }
-                        });
-                      },
-                    ),
-                  ));
+                    )),
+                  );
                 }
                 return Container(
                   child: widget.data,
@@ -319,7 +318,6 @@ class _ResultState extends State<Result> with TickerProviderStateMixin {
                   height: 0,
                 );
               }),
-              Center(child: AdmobBanner(adUnitId: ams.getBannerAdId(), adSize: AdmobBannerSize.BANNER))
             ],
           ),
         ),

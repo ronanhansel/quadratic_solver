@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quadratic_solver/pages/home.dart';
@@ -17,6 +18,7 @@ void main() async{
   await Hive.openBox<String>("databox");
   await GetStorage.init();
   await string.init();
+  Admob.initialize();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MaterialApp(

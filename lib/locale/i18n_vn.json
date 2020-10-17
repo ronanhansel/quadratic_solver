@@ -3,6 +3,8 @@
   "user_input_sub": "Chỉ sử dụng số, cho phép số âm và thập phân",
   "empty_values_warning": "Hay điền hết các dữ liệu cần thiết",
   "a_zero": "a không thể bằng không",
+  "Round up to": "Làm tròn đến",
+  "decimal number": "chữ số thập phân",
   "shortcuts": "Cách khác!",
   "minus_is": "Âm là ",
   "plus_is": "Dương là ",
@@ -12,5 +14,17 @@
   "delta_is": "Delta là: ",
   "b_even": "~ Vì b là số chẵn, áp dụng công thức:",
   "since": "Vì",
-  "no_shortcuts": "Không còn cách làm khác"
+  "no_shortcuts": "Không còn cách làm khác",
+  "title_welcome_first": "Chào mừng đến với Quadratic Solver!",
+  "body_welcome_first": "Bạn có thể nhấn chọn lá cờ tương ứng để đổi ngôn ngữ",
+  "title_welcome_second": "Một ứng dụng tiện lợi, giải quyết mọi vấn đề",
+  "body_welcome_second": "Chọn = để hiện kết quả",
+  "title_welcome_third": "Thông minh và trực quan",
+  "body_welcome_third": "Vuốt lên để thấy những mẹo nhỏ",
+  "guide_first": "Thay đổi ngôn ngữ ở đây!",
+  "guide_second": "Thay đổi các hệ số ở đây!",
+  "guide_third": "Nhấn vào đây để xem kết quả",
+  "Next": "Tiếp tục",
+  "Done": "Xong",
+  "Skip": "Thoát"
 }
