@@ -26,7 +26,18 @@ class Hints {
                 Text(string.text('b_even')),
                 Wrap(
                   children: [
-                    CaTeX('\\frac {-b + \\sqrt {\u0394}}  {a}'),
+                    CaTeX('\\frac {-b\' + \\sqrt {\u0394 \'}}  {a}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('b\' = '),
+                    CaTeX('\\frac {b}  {2}'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('\u0394 \' = b\' * a * c'),
                   ],
                 ),
               ],

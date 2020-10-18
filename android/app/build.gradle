@@ -44,8 +44,8 @@ android {
         applicationId "com.rh.quadratic_solver"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.4.0"
+        versionCode 5
+        versionName "1.5.0"
     }
     signingConfigs {
         release {
@@ -82,7 +82,7 @@ android {
         }
     }
     buildTypes {
-        release {
+        profile {
             signingConfig signingConfigs.profile
         }
     }
