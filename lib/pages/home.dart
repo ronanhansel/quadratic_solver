@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/cupertino.dart';
@@ -125,119 +127,123 @@ class _HomeState extends State<Home> {
                       SizedBox(
                         height: 40,
                       ),
-                     Column(
-                       children: [
-                         Center(
-                           child: Text(
-                             '$a' + 'x\u00B2 + ' + '$b' + 'x + ' + '$c' + ' = 0',
-                             style: TextStyle(fontSize: 30),
-                           ),
-                         ),
-                         SizedBox(
-                           height: 20,
-                         ),
-                         Row(
-                           key: intro.keys[1],
-                           crossAxisAlignment: CrossAxisAlignment.end,
-                           children: [
-                             Divider(
-                               color: Colors.white,
-                               height: 10,
-                             ),
-                             Expanded(
-                               flex: 1,
-                               child: TextField(
-                                 autocorrect: false,
-                                 controller: firstController,
-                                 onChanged: (text) {
-                                   setState(() {
-                                     a = text;
-                                   });
-                                 },
-                                 decoration: InputDecoration(
-                                     labelText: 'a',
-                                     labelStyle: TextStyle(
-                                       color: Colors.red,
-                                       fontSize: 30,
-                                     )),
-                                 keyboardType: TextInputType.numberWithOptions(
-                                     decimal: false),
-                                 inputFormatters: <TextInputFormatter>[
-                                   FilteringTextInputFormatter.allow(
-                                       RegExp("[0-9-.]")),
-                                 ],
-                               ),
-                             ),
-                             SizedBox(
-                               width: 10,
-                             ),
-                             Expanded(
-                               flex: 1,
-                               child: TextField(
-                                 autocorrect: false,
-                                 controller: secondController,
-                                 onChanged: (text) {
-                                   setState(() {
-                                     b = text;
-                                   });
-                                 },
-                                 decoration: InputDecoration(
-                                     labelText: 'b',
-                                     labelStyle: TextStyle(
-                                       color: Colors.red,
-                                       fontSize: 30,
-                                     )),
-                                 keyboardType: TextInputType.numberWithOptions(
-                                     decimal: false),
-                                 inputFormatters: <TextInputFormatter>[
-                                   FilteringTextInputFormatter.allow(
-                                       RegExp("[0-9-.]")),
-                                 ],
-                               ),
-                             ),
-                             SizedBox(
-                               width: 10,
-                             ),
-                             Expanded(
-                               flex: 1,
-                               child: TextField(
-                                 autocorrect: false,
-                                 controller: thirdController,
-                                 onChanged: (text) {
-                                   setState(() {
-                                     c = text;
-                                   });
-                                 },
-                                 decoration: InputDecoration(
-                                     labelText: 'c',
-                                     labelStyle: TextStyle(
-                                       color: Colors.red,
-                                       fontSize: 30,
-                                     )),
-                                 keyboardType: TextInputType.numberWithOptions(
-                                     decimal: false),
-                                 inputFormatters: <TextInputFormatter>[
-                                   FilteringTextInputFormatter.allow(
-                                       RegExp("[0-9-.]")),
-                                 ],
-                               ),
-                             ),
-                           ],
-                         ),
-                         SizedBox(
-                           height: MediaQuery.of(context).size.height / 8,
-                         ),
-                         ClipRRect(
-                           borderRadius: BorderRadius.circular(10),
-                           child: AdmobBanner(
-                               adUnitId: ams.getBannerAdId(),
-                               adSize: AdmobBannerSize.BANNER),
-                         ),
-                       ],
-                     )
+                      Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              '$a' +
+                                  'x\u00B2 + ' +
+                                  '$b' +
+                                  'x + ' +
+                                  '$c' +
+                                  ' = 0',
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            key: intro.keys[1],
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Divider(
+                                color: Colors.white,
+                                height: 10,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: TextField(
+                                  autocorrect: false,
+                                  controller: firstController,
+                                  onChanged: (text) {
+                                    setState(() {
+                                      a = text;
+                                    });
+                                  },
+                                  decoration: InputDecoration(
+                                      labelText: 'a',
+                                      labelStyle: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 30,
+                                      )),
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: false),
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp("[0-9-.]")),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: TextField(
+                                  autocorrect: false,
+                                  controller: secondController,
+                                  onChanged: (text) {
+                                    setState(() {
+                                      b = text;
+                                    });
+                                  },
+                                  decoration: InputDecoration(
+                                      labelText: 'b',
+                                      labelStyle: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 30,
+                                      )),
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: false),
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp("[0-9-.]")),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: TextField(
+                                  autocorrect: false,
+                                  controller: thirdController,
+                                  onChanged: (text) {
+                                    setState(() {
+                                      c = text;
+                                    });
+                                  },
+                                  decoration: InputDecoration(
+                                      labelText: 'c',
+                                      labelStyle: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 30,
+                                      )),
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: false),
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp("[0-9-.]")),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 8,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: AdmobBanner(
+                                adUnitId: ams.getBannerAdId(),
+                                adSize: AdmobBannerSize.BANNER),
+                          ),
+                        ],
+                      )
                     ],
                   ),
-
                   SizedBox(
                     height: 60,
                   ),
@@ -278,7 +284,7 @@ class _HomeState extends State<Home> {
                               context: context,
                               builder: (BuildContext context) {
                                 return Alert(
-                                  warning: 'empty_values_warning',
+                                  warning: string.text('empty_values_warning'),
                                 );
                               });
                         } else if (thirdController.text == '') {
@@ -286,20 +292,79 @@ class _HomeState extends State<Home> {
                               context: context,
                               builder: (BuildContext context) {
                                 return Alert(
-                                  warning: 'empty_values_warning',
+                                  warning: string.text('empty_values_warning'),
                                 );
                               });
                         } else {
-                          dataBox.put("data1", firstController.text);
-                          dataBox.put(
-                            "data2",
-                            secondController.text,
-                          );
-                          dataBox.put(
-                            "data3",
-                            thirdController.text,
-                          );
-                          Navigator.of(context).push(_createRoute());
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BackdropFilter(
+                                    filter:
+                                        ImageFilter.blur(sigmaX: 8, sigmaY: 5),
+                                    child: Dialog(
+                                      insetAnimationCurve: Curves.elasticInOut,
+                                      insetAnimationDuration:
+                                          Duration(seconds: 1),
+                                      insetPadding: EdgeInsets.all(8),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0)),
+                                      backgroundColor: Colors.white,
+                                      child: Container(
+                                        width: 150,
+                                        height: 100,
+                                        child: Center(
+                                          child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                              
+                                                value: "action",
+                                                items: [
+                                                  DropdownMenuItem(
+                                                    value: "action",
+                                                    child: Text(
+                                                        string.text('select_action')),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "result",
+                                                    child:
+                                                        Text(string.text('result')),
+                                                  ),
+                                                  DropdownMenuItem(
+                                                    value: "isin",
+                                                    child: Text(string.text('isin')),
+                                                  )
+                                                ],
+                                                onChanged: (value) {
+                                                  switch (value) {
+                                                    case 'result':
+                                                      {
+                                                        dataBox.put("data1",
+                                                            firstController.text);
+                                                        dataBox.put(
+                                                          "data2",
+                                                          secondController.text,
+                                                        );
+                                                        dataBox.put(
+                                                          "data3",
+                                                          thirdController.text,
+                                                        );
+                                                        Navigator.of(context)
+                                                            .push(_createRoute());
+                                                      }
+                                                      break;
+                                                    case 'isin':
+                                                      {
+                                                        //TODO: ISIN
+                                                      }
+                                                      break;
+                                                  }
+                                                }),
+                                          ),
+                                        ),
+                                      ),
+                                    ));
+                              });
                         }
                       },
                     ),

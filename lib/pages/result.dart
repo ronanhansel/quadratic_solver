@@ -14,7 +14,7 @@ class Result extends StatefulWidget {
   _ResultState createState() => _ResultState();
 }
 
-class _ResultState extends State<Result> with TickerProviderStateMixin {
+class _ResultState extends State<Result> {
   int round = 8;
   int decimal;
   final ams = AdMobService();
